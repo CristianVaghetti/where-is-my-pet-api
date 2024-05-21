@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Helpers\ResponseHelper;
+use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\ForgotPasswordRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Repository\PasswordRepository;
 use App\Http\Validation\PasswordValidation;
 
@@ -11,6 +14,9 @@ use App\Http\Validation\PasswordValidation;
 
 class PasswordController extends Controller
 {
+    protected PasswordRepository $repository;
+    protected PasswordValidation $validation;
+
     /**
      * Create a new controller instance
      * 
@@ -26,7 +32,7 @@ class PasswordController extends Controller
         $this->validation = $validation;
     }
 
-    public function forgot(Request $request)
+    public function forgot(ForgotPasswordRequest $request)
     {
         try {
             $data = $request->all();
@@ -47,7 +53,7 @@ class PasswordController extends Controller
         return $response;
     }
 
-    public function reset(Request $request)
+    public function reset(ResetPasswordRequest $request)
     {
         try {
             $data = $request->all();
@@ -63,7 +69,7 @@ class PasswordController extends Controller
         return $response;
     }
 
-    public function change(Request $request)
+    public function change(ChangePasswordRequest $request)
     {
         try {
             $data = $request->all();

@@ -34,7 +34,7 @@ class PasswordValidation implements IValidation
      * @param int|null $id
      * @return array|\Illuminate\Http\JsonResponse
      */
-    public function validate(array $dados, $id = 0): array | JsonResponse
+    public function validate(array $dados, $id = 0)
     {
         if (!$this->repository->exists(Arr::only($dados, ["email"]), $id)) {
             return ResponseHelper::responseValidateError([], msg: "Email não localizado!", json: false);
