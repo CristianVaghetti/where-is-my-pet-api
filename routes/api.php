@@ -25,6 +25,9 @@ Route::prefix('auth')->controller('AuthController')->group(function() {
 Route::post('/user/password/forgot', 'PasswordController@forgot');
 Route::post('/user/password/reset', 'PasswordController@reset');
 
+Route::get('/states', 'StateController@index');
+Route::get('/cities/{uf}', 'CityController@index');
+
 Route::middleware('jwt.authenticate')->group(function () {
     Route::get('/users', 'UserController@index');
     Route::get('/user/{id}', 'UserController@show');

@@ -88,9 +88,9 @@ class User extends Model implements JWTSubject
         return $this->hasMany('App\Models\Password', 'user_id', 'id');
     }
 
-    public function profiles()
+    public function profile()
     {
-        return $this->belongsToMany('App\Models\Profile');
+        return $this->belongsTo('App\Models\Profile');
     }
 
     /**

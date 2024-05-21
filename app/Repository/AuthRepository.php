@@ -57,12 +57,22 @@ class AuthRepository extends BaseRepository
             return ResponseHelper::responseError(msg: 'Dados inválidos. Tente novamente!', json: false, statusCode: 403);
         }
 
+        $userProfile = $user->load('profile.roles')->profile->toArray();
+
+        $roles = [];
+        foreach($userProfile['roles'] as $role){
+            array_push($roles, Arr::only($role, ['action', 'subject']));
+        }
+
+        $user->unsetRelation('profile');
+
         $expires_in = \auth()->{'factory'}()->getTTL() * 60;
 
         $data = [
             'token' => $token,
             'expires_in' => Carbon::now('America/Sao_Paulo')->addSeconds($expires_in)->format('Y-m-d H:i:s'),
             'user' => $user,
+            'roles' => $roles
         ];
 
         return ResponseHelper::responseSuccess(data: $data, msg: 'Autenticado com sucesso!', json: false);

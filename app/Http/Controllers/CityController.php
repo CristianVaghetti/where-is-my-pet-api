@@ -14,4 +14,9 @@ class CityController extends Controller
     {
         $this->repository = $repository;
     }
+
+    public function index($uf)
+    {
+        return ResponseHelper::responseSuccess($this->repository->getByUf($uf)->toArray(), "");
+    }
 }

@@ -14,4 +14,9 @@ class StateController extends Controller
     {
         $this->repository = $repository;
     }
+
+    public function index()
+    {
+        return ResponseHelper::responseSuccess($this->repository->all(['name', 'ASC'])->toArray(), "");
+    }
 }
