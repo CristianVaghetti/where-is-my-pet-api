@@ -33,13 +33,13 @@ class ShelterRequest extends BaseRequest
     {
         return [
             'name' => ['required', 'string'],
-            'state_id' => ['required', 'integer'],
-            'city_id' => ['required', 'integer'],
-            'zip_code' => ['string', 'max:8', 'min:8'],
+            'state_id' => ['required'],
+            'city_id' => ['required'],
+            'zip_code' => ['string', 'min:8'],
             'district' => ['required', 'string'],
             'address' => ['required', 'string'],
             'address_number' => ['required', 'string'],
-            'address_note' => ['string'],
+            'address_note' => ['string', 'nullable'],
         ];
     }
 

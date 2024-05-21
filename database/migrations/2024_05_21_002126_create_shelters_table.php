@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('district');
             $table->string('address');
             $table->string('address_number');
-            $table->string('address_note');
+            $table->string('address_note')->nullable();
             
             $table->timestamps();
             $table->softDeletes();
