@@ -12,6 +12,8 @@ use App\Models\Profile;
 use App\Observers\ProfileObserver;
 use App\Models\Shelter;
 use App\Observers\ShelterObserver;
+use App\Models\Pet;
+use App\Observers\PetObserver;
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -34,6 +36,7 @@ class EventServiceProvider extends ServiceProvider
         User::class => [UserObserver::class],
         Profile::class => [ProfileObserver::class],
         Shelter::class => [ShelterObserver::class],
+        Pet::class => [PetObserver::class],
     ];
 
     /**

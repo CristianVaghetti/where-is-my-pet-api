@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\PetController;
 use App\Http\Controllers\ShelterController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +33,5 @@ Route::middleware('jwt.authenticate')->group(function () {
     Route::put('/user/{id}/change-password', 'PasswordController@change');
 
     Route::apiResources(['shelter' => ShelterController::class]);
+    Route::apiResources(['pet' => PetController::class]);
 });
