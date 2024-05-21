@@ -5,15 +5,13 @@ namespace App\Repository;
 use App\Helpers\FileHelper;
 use App\Mail\GeneratedPassword;
 use App\Repository\BaseRepository;
-use App\Models\User;
-use Illuminate\Contracts\Container\BindingResolutionException;
+use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
 use InvalidArgumentException;
 use RuntimeException;
-use Symfony\Component\Mime\Exception\LogicException;
 
 class UserRepository extends BaseRepository
 {

@@ -18,6 +18,10 @@ class Roles extends Seeder
 
         $subjects = [
             'all' => ['manage'],
+            'main_panel' => ['list'],
+            'settings' => ['list'],
+            'st_profiles' => $standardActions,
+            'st_users' => $standardActions,
         ];
 
         foreach($subjects as $sub => $actions){

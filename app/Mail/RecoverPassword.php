@@ -3,7 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Token;
-use App\Models\User;
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;

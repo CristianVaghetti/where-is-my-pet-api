@@ -27,7 +27,7 @@ services:
       MAIL_HOST: smtp.gmail.com
       MAIL_PORT: 465
       MAIL_USERNAME: emaill4r4v3l@gmail.com
-      MAIL_PASSWORD: iuijyqmuddycldfk
+      MAIL_PASSWORD: xpwopnajaviohbvr 
       MAIL_ENCRYPTION: ssl
       MAIL_FROM_ADDRESS: emaill4r4v3l@gmail.com
       MAIL_FROM_NAME: BaseAPI

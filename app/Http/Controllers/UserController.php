@@ -147,36 +147,4 @@ class UserController extends Controller
 
         return $response;
     }
-
-    /**
-     * Active a user.
-     */
-    public function active(int $id)
-    {
-        try {
-            if ($this->repository->changeActive($id, true)) {
-                return ResponseHelper::responseSuccess(msg: "O usuário foi ativado com sucesso.");
-            } else {
-                return ResponseHelper::responseError(msg: "Falha ao ativar o usuário!");
-            }
-        } catch (\Exception $ex) {
-            return ResponseHelper::responseError(msg: $ex->getMessage());
-        }
-    }
-
-    /**
-     * Inactivate the user.
-     */
-    public function inactive(int $id)
-    {
-        try {
-            if ($this->repository->changeActive($id, false)) {
-                return ResponseHelper::responseSuccess(msg: "O usuário foi desativado com sucesso.");
-            } else {
-                return ResponseHelper::responseError(msg: "Falha ao desativar o usuário!");
-            }
-        } catch (\Exception $ex) {
-            return ResponseHelper::responseError(msg: $ex->getMessage());
-        }
-    }
 }

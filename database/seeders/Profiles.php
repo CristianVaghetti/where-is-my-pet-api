@@ -13,7 +13,19 @@ class Profiles extends Seeder
      */
     public function run(): void
     {
-        $profiles = [];
+        $profiles = [
+            [
+                'id' => 2,
+                'name' => 'Cadastrador',
+                'description' => 'Cadastra as fotos dos pets.',
+                'status' => true,
+            ],[
+                'id' => 3,
+                'name' => 'Usuário',
+                'description' => 'Acessa o sistema para buscar o seu pet',
+                'status' => true,
+            ]
+        ];
 
         foreach($profiles as $profile){
             Profile::create($profile);
