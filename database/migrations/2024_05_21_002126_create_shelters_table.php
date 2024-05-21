@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('address_note');
             
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('state_id')->references('id')->on('states');
             $table->foreign('city_id')->references('id')->on('cities');

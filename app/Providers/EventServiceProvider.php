@@ -10,6 +10,8 @@ use App\User;
 use App\Observers\UserObserver;
 use App\Models\Profile;
 use App\Observers\ProfileObserver;
+use App\Models\Shelter;
+use App\Observers\ShelterObserver;
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -31,6 +33,7 @@ class EventServiceProvider extends ServiceProvider
     protected $observers = [
         User::class => [UserObserver::class],
         Profile::class => [ProfileObserver::class],
+        Shelter::class => [ShelterObserver::class],
     ];
 
     /**
