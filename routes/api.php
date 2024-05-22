@@ -37,4 +37,5 @@ Route::middleware('jwt.authenticate')->group(function () {
 
     Route::apiResources(['shelter' => ShelterController::class]);
     Route::apiResources(['pet' => PetController::class]);
+    Route::get('/pet-types', 'PetController@fetchTypes');
 });

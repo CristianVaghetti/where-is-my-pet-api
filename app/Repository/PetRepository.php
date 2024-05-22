@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Helpers\FileHelper;
 use App\Models\Pet;
+use App\Models\PetType;
 use App\Repository\BaseRepository;
 
 class PetRepository extends BaseRepository
@@ -57,6 +58,11 @@ class PetRepository extends BaseRepository
         }
 
         return $model;
+    }
+
+    public function fetchTypes()
+    {
+        return PetType::all()->toArray();
     }
 
       /**

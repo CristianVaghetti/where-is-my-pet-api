@@ -109,4 +109,11 @@ class PetController extends Controller
             return ResponseHelper::responseError([], $ex->getMessage());
         }
     }
+
+    public function fetchTypes()
+    {
+        $types['types'] = $this->repository->fetchTypes();
+        
+        return ResponseHelper::responseSuccess(data: $types);
+    }
 }
