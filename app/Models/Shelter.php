@@ -35,4 +35,14 @@ class Shelter extends Model
         'address_number' => 'Número',
         'address_note' => 'Complemento',
     ]; 
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    } 
 }

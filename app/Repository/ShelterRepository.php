@@ -23,7 +23,7 @@ class ShelterRepository extends BaseRepository
     public function search(array $params = [], int $limit = null)
     {
 
-        $model = $this->model;
+        $model = $this->model->with('city');
 
         $model->orderby('created_at', 'desc');
 
