@@ -22,7 +22,7 @@ class PetRepository extends BaseRepository
     public function search(array $params = [], int $limit = null)
     {
 
-        $model = $this->model;
+        $model = $this->model->with('shelter.city');
 
         $model->orderby('created_at', 'desc');
 
@@ -44,7 +44,7 @@ class PetRepository extends BaseRepository
             $this->beginTransaction();
 
             if(isset($data['file'])){
-                $data['photo'] = $this->_storePath($data['file']);
+                $data['image'] = $this->_storePath($data['file']);
             } 
             
             $model = parent::save(data: $data);

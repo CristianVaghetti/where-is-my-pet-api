@@ -12,6 +12,6 @@ class PetObserver extends BaseObserver
      * @var array
      */
     protected array $fieldsExcept = [
-        'photo'
+        'image'
     ];
 }

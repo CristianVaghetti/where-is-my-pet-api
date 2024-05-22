@@ -45,4 +45,9 @@ class Shelter extends Model
     {
         return $this->belongsTo(State::class);
     } 
+
+    public function pets()
+    {
+        return $this->hasMany(Pet::class);
+    }
 }

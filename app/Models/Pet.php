@@ -11,7 +11,7 @@ class Pet extends Model
 
     protected $fillable = [
         'shelter_id',
-        'photo',
+        'image',
         'personality',
         'found',
         'owner_name',
@@ -20,7 +20,7 @@ class Pet extends Model
     ];
 
     protected $casts = [
-        'photo' => File::class,
+        'image' => File::class,
         'shelter_id' => 'integer',
         'found' => 'boolean',
     ];
@@ -33,4 +33,9 @@ class Pet extends Model
         'owner_email' => 'Email do dono',
         'owner_phone' => 'Telefone do dono',
     ];
+
+    public function shelter()
+    {
+        return $this->belongsTo(Shelter::class);
+    } 
 }

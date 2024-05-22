@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('pets', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('shelter_id');
-            $table->string('photo');
+            $table->unsignedInteger('type_id');
+            $table->string('image');
             $table->string('personality');
             $table->boolean('found')->default(false);
             $table->string('owner_name')->nullable();
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('shelter_id')->references('id')->on('shelters')->cascadeOnUpdate();
+            $table->foreign('type_id')->references('id')->on('pet_types')->cascadeOnUpdate();
         });
     }
 
