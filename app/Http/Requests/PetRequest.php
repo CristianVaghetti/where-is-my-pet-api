@@ -36,9 +36,9 @@ class PetRequest extends BaseRequest
             'file' => ['required', 'string'],
             'shelter_id' => ['required', 'integer'],
             'found' => ['boolean'],
-            'owner_name' => ['string'],
-            'owner_email' => ['email'],
-            'owner_phone' => ['string'],
+            'owner_name' => ['string', 'nullable'],
+            'owner_email' => ['email', 'nullable'],
+            'owner_phone' => ['string', 'nullable'],
         ];
     }
 
