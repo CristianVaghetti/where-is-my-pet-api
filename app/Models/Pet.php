@@ -11,6 +11,7 @@ class Pet extends Model
 
     protected $fillable = [
         'shelter_id',
+        'type_id',
         'image',
         'personality',
         'found',
@@ -22,10 +23,12 @@ class Pet extends Model
     protected $casts = [
         'image' => File::class,
         'shelter_id' => 'integer',
+        'type_id' => 'integer',
         'found' => 'boolean',
     ];
 
     protected $logAttributes = [
+        'type_id' => 'Tipo/grupo do animal',
         'shelter_id' => 'Abrigo',
         'personality' => 'Personalidade',
         'found' => 'Encontrado',
