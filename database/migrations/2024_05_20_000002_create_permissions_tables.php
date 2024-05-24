@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 20);
             $table->string('description', 100);
-            $table->boolean('status')->unsigned()->default(false);
+            $table->boolean('status')->default(false);
             $table->string('roles', 500)->nullable();
             $table->timestamps();
         });

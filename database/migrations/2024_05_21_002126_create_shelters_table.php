@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('shelters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedInteger('state_id')->nullable();
-            $table->unsignedInteger('city_id')->nullable();
+            $table->unsignedInteger('state_id');
+            $table->unsignedInteger('city_id');
             $table->string('zip_code');
             $table->string('district');
             $table->string('address');

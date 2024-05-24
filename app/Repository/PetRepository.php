@@ -25,7 +25,7 @@ class PetRepository extends BaseRepository
 
         $model = $this->model->with('shelter.city');
 
-        $model->orderby('created_at', 'desc');
+        $model->orderby('created_at', 'asc');
 
         if ($limit) {
             $paginator = $model->paginate($limit);
