@@ -34,7 +34,7 @@ class UserRepository extends BaseRepository
      */
     public function search(array $params = [], int $limit = null) : array
     {
-        $model = $this->model;
+        $model = $this->model->with(['profile']);
 
         // Filter by status
         if (isset($params['status']) && $params['status']) {

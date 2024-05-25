@@ -52,17 +52,8 @@ class ProfileRepository extends BaseRepository
      */
     public function search(string $filter, array $params = [], int $limit = null) : array
     {
-        $model = $this->model->with(['roles', 'type']);
+        $model = $this->model->with(['roles']);
 
-        // Filter by name
-        if ($filter) {
-            $model = $model->where('name', 'like', '%'.$filter.'%');
-        }
-
-        // Filter by status
-        if (isset($params['status']) && $params['status']) {
-            $model = $model->where('status', $params['status']);
-        }
         $model->orderby('name', 'asc');
 
         if ($limit) {
