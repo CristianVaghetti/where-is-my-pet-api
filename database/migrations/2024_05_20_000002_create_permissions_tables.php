@@ -5,6 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 return new class extends Migration
 {
@@ -58,6 +59,7 @@ return new class extends Migration
             'username' => 'admin',
             'email' => 'vaghetticristian@gmail.com',
             'password' => Hash::make('admin'),
+            'remember_token' => Str::random(10),
         ]);
     }
 
