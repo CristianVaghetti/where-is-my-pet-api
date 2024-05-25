@@ -23,7 +23,7 @@ class PetRepository extends BaseRepository
     public function search(array $params = [], int $limit = null)
     {
 
-        $model = $this->model->with('shelter.city.state');
+        $model = $this->model->with(['shelter.city.state','shelter.responsible']);
 
         $model->orderby('created_at', 'asc');
 

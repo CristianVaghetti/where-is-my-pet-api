@@ -45,8 +45,8 @@ return new class extends Migration
 
         DB::table('profiles')->insert([
             'id' => 1,
-            'name' => 'Admin',
-            'description' => 'Acessa total ao sistema.',
+            'name' => 'ADMIN',
+            'description' => 'ACESSO TOTAL AO SISTEMA.',
             'status' => true,
             'created_at' => now(),
             'updated_at' => now(),
@@ -55,8 +55,8 @@ return new class extends Migration
         DB::table('users')->insert([
             'id' => 1,
             'profile_id' => 1,
-            'name' => 'Admin',
-            'username' => 'admin',
+            'name' => 'ADMIN',
+            'username' => 'ADMIN',
             'email' => 'vaghetticristian@gmail.com',
             'password' => Hash::make('admin'),
             'remember_token' => Str::random(10),

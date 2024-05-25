@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedInteger('profile_id');
             $table->string('avatar')->unique()->nullable();
             $table->string('name', 50);
-            $table->string('username', 15)->unique();
-            $table->string('phone', 12)->unique()->nullable();
+            $table->string('username', 16)->unique();
+            $table->string('phone', 16)->nullable();
             $table->string('email',50)->unique();
             $table->string('password');
             $table->rememberToken();
