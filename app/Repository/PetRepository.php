@@ -45,7 +45,7 @@ class PetRepository extends BaseRepository
             $this->beginTransaction();
 
             if(isset($data['file'])){
-                $data['image'] = $this->_storePath($data['file']);
+                $data['image'] = FileHelper::storePath($data['file']);
             } 
             
             $model = parent::save(data: $data);
@@ -63,25 +63,5 @@ class PetRepository extends BaseRepository
     public function fetchTypes()
     {
         return PetType::all()->toArray();
-    }
-
-      /**
-     * Store document file
-     * 
-     * @param null|string $photo 
-     * @return string|false|null 
-     * 
-     * @throws LogicException 
-     * @throws BindingResolutionException 
-     */
-    private function _storePath(?string $file): string | bool | null
-    {
-        $path = null;
-        if ($file && !empty($file)) {
-            $upFile = FileHelper::fromBase64($file);
-            $path = $upFile->store("files/pets");
-        }
-
-        return $path;
     }
 }

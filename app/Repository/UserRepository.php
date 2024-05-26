@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -69,6 +70,21 @@ class UserRepository extends BaseRepository
         $model = null;
         try {
             $this->beginTransaction();
+
+            if(isset($data['id'])){
+                $old = $this->model->find($data['id']);
+                $oldNoCasting = $old->getAttributesWithoutCasting();
+
+                if(isset($old->avatar) && $old->avatar === $data['avatar']){
+                    unset($data['avatar']);
+                } else {
+                    if(isset($oldNoCasting['avatar']) && Storage::exists($oldNoCasting['avatar'])){
+                        Storage::delete($oldNoCasting['avatar']);
+                    }
+                }
+            }
+
+            $data['avatar'] = FileHelper::storePath($data['avatar']);
 
             if (!isset($data['id']) || empty($data['id'])) {
                 $password = \Illuminate\Support\Str::random(8);

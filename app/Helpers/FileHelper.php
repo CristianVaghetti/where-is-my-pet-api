@@ -76,4 +76,15 @@ abstract class FileHelper
 
         return "data:{$mimeType};base64,{$fileData}";
     }
+
+    public static function storePath(?string $file): string | bool | null
+    {
+        $path = null;
+        if ($file && !empty($file)) {
+            $upFile = FileHelper::fromBase64($file);
+            $path = $upFile->store("files/users/avatars");
+        }
+
+        return $path;
+    }
 }
