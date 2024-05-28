@@ -13,7 +13,7 @@ class PetTypes extends Seeder
      */
     public function run(): void
     {
-        $types = ['Cachorro', 'Gato', 'Grande porte'];
+        $types = ['CACHORRO', 'GATO', 'GRANDE PORTE'];
 
         foreach($types as $type){
             PetType::create([

@@ -25,6 +25,16 @@ class PetRepository extends BaseRepository
 
         $model = $this->model->with(['shelter.city.state','shelter.responsible']);
 
+        if (isset($params['type_id']) && $params['type_id']) {
+            $model = $model->where('type_id', $params['type_id']);
+        }
+
+        if (isset($params['shelter_id']) && $params['shelter_id']) {
+            $model = $model->whereHas('shelter', function ($query) use ($params){
+                $query->where('id', $params['shelter_id']);
+            });
+        }
+
         $model->orderby('created_at', 'asc');
 
         if ($limit) {
