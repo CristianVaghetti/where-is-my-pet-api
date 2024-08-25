@@ -55,7 +55,7 @@ class GeneratedPassword extends Mailable
             markdown: 'mail.generatedPassword', 
             with: [
                 'token' => $this->token,
-                'url' => "{$url}/user/reset-password?token={$this->token->token}",
+                'url' => "{$url}/reset-password?token={$this->token->token}",
                 'user' => $this->user
             ], 
             htmlString: null
