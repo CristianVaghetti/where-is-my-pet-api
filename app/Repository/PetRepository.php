@@ -48,7 +48,7 @@ class PetRepository extends BaseRepository
             });
         }
 
-        if(!isset($params['home'])){
+        if(!isset($params['home']) && Auth::user()->profile->id !== 1){
             $model = $model->whereHas('shelter.users', function ($query){
                 $query->where('user_id', Auth::user()->id);
             });
