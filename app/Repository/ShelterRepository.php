@@ -6,6 +6,7 @@ use App\Models\Shelter;
 use App\Models\State;
 use App\Models\City;
 use App\Repository\BaseRepository;
+use Illuminate\Support\Facades\Auth;
 
 class ShelterRepository extends BaseRepository
 {
@@ -22,8 +23,13 @@ class ShelterRepository extends BaseRepository
 
     public function search(array $params = [], int $limit = null)
     {
-
         $model = $this->model->with('city');
+
+        if(!isset($params['home'])){
+            $model = $model->whereHas('users', function ($query){
+                $query->where('user_id', Auth::user()->id);
+            });
+        }
 
         $model->orderby('created_at', 'desc');
 

@@ -6,6 +6,7 @@ use App\Helpers\FileHelper;
 use App\Models\Pet;
 use App\Models\PetType;
 use App\Repository\BaseRepository;
+use Illuminate\Support\Facades\Auth;
 
 class PetRepository extends BaseRepository
 {
@@ -23,7 +24,7 @@ class PetRepository extends BaseRepository
     public function search(array $params = [], int $limit = null)
     {
 
-        $model = $this->model->with(['shelter.city.state','shelter.responsible']);
+        $model = $this->model->with(['shelter.city.state','shelter.users']);
 
         if (isset($params['type_id']) && $params['type_id']) {
             $model = $model->where('type_id', $params['type_id']);
@@ -44,6 +45,12 @@ class PetRepository extends BaseRepository
         if (isset($params['shelter_id']) && $params['shelter_id']) {
             $model = $model->whereHas('shelter', function ($query) use ($params){
                 $query->where('id', $params['shelter_id']);
+            });
+        }
+
+        if(!isset($params['home'])){
+            $model = $model->whereHas('shelter.users', function ($query){
+                $query->where('user_id', Auth::user()->id);
             });
         }
 

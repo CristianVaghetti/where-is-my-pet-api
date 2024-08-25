@@ -12,7 +12,6 @@ class Shelter extends Model
     protected $fillable = [
         'name',
         'state_id',
-        'user_id',
         'city_id',
         'zip_code',
         'district',
@@ -24,7 +23,6 @@ class Shelter extends Model
     protected $casts = [
         'state_id' => 'integer',
         'city_id' => 'integer',
-        'user_id' => 'integer',
     ];
 
     protected $logAttributes = [
@@ -36,7 +34,6 @@ class Shelter extends Model
         'address' => 'Logradouro',
         'address_number' => 'Número',
         'address_note' => 'Complemento',
-        'user_id' => 'Responsável',
     ]; 
 
     public function city()
@@ -54,8 +51,8 @@ class Shelter extends Model
         return $this->hasMany(Pet::class);
     }
 
-    public function responsible()
+    public function users()
     {
-        return $this->belongsTo('App\User', 'user_id', 'id');
+        return $this->belongsToMany('App\User', 'user_shelter');
     }
 }
