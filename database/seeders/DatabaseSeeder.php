@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PetTypes::class);
 
         \App\User::factory()->create([
-            'id' => 2,
             'profile_id' => 3,
             'email' => 'guest@guest.com',
             'username' => 'CONVIDADO',

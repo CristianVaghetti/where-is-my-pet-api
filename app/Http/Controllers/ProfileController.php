@@ -57,20 +57,11 @@ class ProfileController extends Controller
         }
     }
 
-    public function storeUpdate(ProfileRequest $request)
+    public function update(ProfileRequest $request)
     {
         try {
             $data = $request->all();
-            $id = null;
-            $msgSuccess = "Perfil cadastrado com sucesso.";
-            $msgError   = "Falha ao cadastrar perfil!";
-            
-            if(isset($data['id'])) {
-                $msgSuccess = "Perfil alterado com sucesso.";
-                $msgError   = "Falha ao alterar perfil!";
-
-                $id = $data['id'];
-            }
+            $id = $data['id'];
 
             $response = $this->validation->validate($data, $id);
             
@@ -79,9 +70,35 @@ class ProfileController extends Controller
                 $model = $this->repository->save($data);
 
                 if ($model) {
-                    $response = ResponseHelper::responseSuccess(data: $model->toArray(), msg: $msgSuccess);
+                    $response = ResponseHelper::responseSuccess(data: $model->toArray(), msg: 'Perfil alterado com sucesso.');
                 } else {
-                    $response = ResponseHelper::responseError(msg: $msgError);
+                    $response = ResponseHelper::responseError(msg: 'Falha ao alterar perfil!');
+                }
+            } else {
+                $response = response()->json($response, 422);
+            }
+        } catch (\Exception $e) {
+            $response = ResponseHelper::responseError(msg: $e->getMessage());
+        }
+
+        return $response;
+    }
+
+    public function store(ProfileRequest $request)
+    {
+        try {
+            $data = $request->all();
+
+            $response = $this->validation->validate($data);
+            
+            if ($response['success']) {
+
+                $model = $this->repository->save($data);
+
+                if ($model) {
+                    $response = ResponseHelper::responseSuccess(data: $model->toArray(), msg: 'Perfil criado com sucesso.');
+                } else {
+                    $response = ResponseHelper::responseError(msg: 'Erro ao criar o perfil');
                 }
             } else {
                 $response = response()->json($response, 422);

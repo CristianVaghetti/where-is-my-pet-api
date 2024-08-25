@@ -34,7 +34,6 @@ class ProfileRequest extends BaseRequest
         return [
             'name' => ['required', 'max:20'],
             'description' => ['required', 'max:100'],
-            'type_id' => ['required', 'integer', 'min:1'],
             'status' => ['boolean'],
             'roles' => ['array', 'required'],
         ];

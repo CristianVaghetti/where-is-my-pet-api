@@ -44,7 +44,6 @@ return new class extends Migration
         });
 
         DB::table('profiles')->insert([
-            'id' => 1,
             'name' => 'ADMIN',
             'description' => 'ACESSO TOTAL AO SISTEMA.',
             'status' => true,
@@ -52,13 +51,13 @@ return new class extends Migration
             'updated_at' => now(),
         ]);
 
-        DB::table('users')->insert([
-            'id' => 1,
+        \App\User::factory()->create([
             'profile_id' => 1,
             'name' => 'ADMIN',
             'username' => 'ADMIN',
             'email' => 'vaghetticristian@gmail.com',
             'password' => Hash::make('admin'),
+            'status' => true,
             'remember_token' => Str::random(10),
         ]);
     }

@@ -15,12 +15,10 @@ class Profiles extends Seeder
     {
         $profiles = [
             [
-                'id' => 2,
                 'name' => 'CADASTRADOR',
                 'description' => 'CADASTRA OS PETS.',
                 'status' => true,
             ],[
-                'id' => 3,
                 'name' => 'USUÁRIO',
                 'description' => 'ACESSA O SISTEMA PRA BUSCAR SEU PET.',
                 'status' => true,
