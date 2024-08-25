@@ -9,8 +9,8 @@ use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Repository\PasswordRepository;
 use App\Http\Validation\PasswordValidation;
-
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class PasswordController extends Controller
 {
@@ -74,6 +74,10 @@ class PasswordController extends Controller
         try {
             $data = $request->all();
             $id = (int)$request->id;
+
+            if(!Hash::check($data['password'], Auth::user()->password)){
+                return ResponseHelper::responseError(msg: "Senha atual inválida!", statusCode: 401);
+            }
             
             if ($this->repository->change($data, $id)) {
                 $response = ResponseHelper::responseSuccess(msg: "Senha aterada com sucesso.");

@@ -116,7 +116,7 @@ class UserController extends Controller
             $user = $this->repository->find($id);
 
             if ($user) {
-                return ResponseHelper::responseSuccess(data: $user->toArray());
+                return ResponseHelper::responseSuccess(data: $user->load('profile')->toArray());
             } else {
                 return ResponseHelper::responseError(msg: "Usuário não encontrado!");
             }

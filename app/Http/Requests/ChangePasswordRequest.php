@@ -33,8 +33,7 @@ class ChangePasswordRequest extends BaseRequest
     {
         return [
             'password' => 'required',
-            'new_password' => 'required',
-            'new_password_confirmation' => 'required',
+            'new_password' => ['required', 'confirmed'],
         ];
     }
 

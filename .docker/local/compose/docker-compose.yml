@@ -1,7 +1,6 @@
-version: "3.1"
 services:
   base-api:
-    image: base/api:latest
+    image: base-api:latest
     container_name: base-api
     environment:
       REDIRECT_HTTPS: "false"
@@ -20,9 +19,6 @@ services:
       CACHE_DRIVER: file
       SESSION_DRIVER: file
       QUEUE_DRIVER: sync
-      REDIS_HOST: 127.0.0.1
-      REDIS_PASSWORD: null
-      REDIS_PORT: 6379
       MAIL_DRIVER: smtp
       MAIL_HOST: smtp.gmail.com
       MAIL_PORT: 465
@@ -32,7 +28,7 @@ services:
       MAIL_FROM_ADDRESS: emaill4r4v3l@gmail.com
       MAIL_FROM_NAME: BaseAPI
       JWT_SECRET: 'NNsMZwtCw4DQx5fw3naL1GI0djgZ1yzjZyap2y5SHjfoFzffVDGash3rWh8tP5rY'
-      URL_FRONT: 'http://localhost:3000'
+      URL_FRONT: 'http://localhost:8000'
     volumes:
       - .:/var/www/html
     ports:
