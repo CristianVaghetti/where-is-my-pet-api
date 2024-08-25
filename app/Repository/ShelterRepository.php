@@ -25,7 +25,7 @@ class ShelterRepository extends BaseRepository
     {
         $model = $this->model->with('city');
 
-        if(!isset($params['home'])){
+        if(!isset($params['home']) && Auth::user()->profile->id !== 1){
             $model = $model->whereHas('users', function ($query){
                 $query->where('user_id', Auth::user()->id);
             });
@@ -61,6 +61,8 @@ class ShelterRepository extends BaseRepository
             }
             
             $model = parent::save(data: $data);
+
+            $model->users()->attach($model->id, ['user_id' => Auth::user()->id]);
 
             $this->commit();
         } catch (\Exception $e) {
