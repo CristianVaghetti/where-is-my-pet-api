@@ -18,13 +18,12 @@ class JWTAuthenticate extends \Tymon\JWTAuth\Http\Middleware\BaseMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $response = $next($request);
         try {
             $this->authenticate($request);
         } catch (\Exception $e) {
-            $response = ResponseHelper::responseError(msg: $e->getMessage(), statusCode: 401);
+            return ResponseHelper::responseError(msg: $e->getMessage(), statusCode: 401);
         }
-        return $response;
+        return $next($request);
     }
 
     /**

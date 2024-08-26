@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Shelter extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $appends = ['my_shelter'];
 
     protected $fillable = [
         'name',
@@ -53,6 +56,17 @@ class Shelter extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User', 'user_shelter');
+        return $this->belongsToMany('App\User', 'user_shelter')->withPivot('owner');
+    }
+
+    public function getMyShelterAttribute()
+    {
+        $companyRelation = $this->users()->where('user_id', Auth::user()->id)->first();
+        
+        if ($companyRelation) {
+            return $companyRelation->pivot->owner;
+        }
+
+        return false;
     }
 }

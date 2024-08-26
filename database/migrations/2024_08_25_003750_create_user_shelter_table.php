@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('user_shelter', function (Blueprint $table) {
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('shelter_id');
+            $table->boolean('owner')->default(false);
 
             $table->primary(['user_id', 'shelter_id']);
             $table->foreign('shelter_id')->references('id')->on('shelters')->cascadeOnUpdate();

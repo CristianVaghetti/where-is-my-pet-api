@@ -84,7 +84,7 @@ class UserRepository extends BaseRepository
                 }
             }
 
-            $data['avatar'] = FileHelper::storePath($data['avatar']);
+            if(isset($data['avatar'])) $data['avatar'] = FileHelper::storePath($data['avatar']);
 
             if (!isset($data['id']) || empty($data['id'])) {
                 $password = \Illuminate\Support\Str::random(8);

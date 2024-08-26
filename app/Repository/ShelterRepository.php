@@ -60,9 +60,11 @@ class ShelterRepository extends BaseRepository
                 $data['city_id'] = $city->id;
             }
             
+            $attach = empty($data['id']);
+            
             $model = parent::save(data: $data);
 
-            $model->users()->attach($model->id, ['user_id' => Auth::user()->id]);
+            if($attach) $model->users()->attach($model->id, ['user_id' => Auth::user()->id, 'owner' => true]);
 
             $this->commit();
         } catch (\Exception $e) {
