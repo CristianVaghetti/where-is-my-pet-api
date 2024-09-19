@@ -33,6 +33,7 @@ Route::middleware('jwt.authenticate')->group(function () {
     Route::get('/users', 'UserController@index');
     Route::get('/user/{id}', 'UserController@show');
     Route::post('/user', 'UserController@store');
+    Route::delete('/user/{id}', 'UserController@destroy');
     Route::put('/user/{id}', 'UserController@update');
     Route::put('/user/{id}/change-password', 'PasswordController@change');
 

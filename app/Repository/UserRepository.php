@@ -163,18 +163,4 @@ class UserRepository extends BaseRepository
             ->whereIn('id', $ids)
             ->get(['id', 'name', 'email']);
     }
-
-    /**
-     * Change user's status
-     *
-     * @param integer $id
-     * @param boolean $status
-     * @return boolean
-     */
-    public function changeStatus(int $id, bool $status) : bool
-    {
-        return $this->model->find($id)->fill([
-            'status' => $status
-        ])->save();
-    }
 }

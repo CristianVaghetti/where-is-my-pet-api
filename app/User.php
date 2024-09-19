@@ -96,6 +96,11 @@ class User extends Model implements JWTSubject
         return $this->belongsTo('App\Models\Profile');
     }
 
+    public function shelters()
+    {
+        return $this->belongsToMany('App\Models\Shelter', 'user_shelter')->withPivot('owner');
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

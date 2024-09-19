@@ -72,7 +72,7 @@ class UserController extends Controller
                     $response = ResponseHelper::responseError(msg: "Falha ao criar o usuário!");
                 }
             } else {
-                $response = response()->json($response, 422);
+                $response = ResponseHelper::responseError(data: $response['data'], msg: $response['msg'], statusCode: 422);
             }
         } catch (\Exception $ex) {
             $response = ResponseHelper::responseError(msg: $ex->getMessage());
@@ -99,7 +99,7 @@ class UserController extends Controller
                     $response = ResponseHelper::responseError(msg: "Falha ao alterar os dados do usuário!");
                 }
             } else {
-                $response = ResponseHelper::responseError($response['data'], $response['msg']);
+                $response = ResponseHelper::responseError(data: $response['data'], msg: $response['msg'], statusCode: 422);
             }
         } catch (\Exception $ex) {
             $response = ResponseHelper::responseError(msg: $ex->getMessage());
@@ -133,14 +133,19 @@ class UserController extends Controller
     {
         try {
             if ((int)\auth()->user()->id === $id) {
-                return ResponseHelper::responseSuccess(msg: "Não é possível executar essa ação!", statusCode: 422);
+                return ResponseHelper::responseSuccess(msg: "Suicídio não é a solução!", statusCode: 422);
             }
-            
-            $response = [];
-            if ($this->repository->delete($id)) {
-                $response = ResponseHelper::responseSuccess(msg: "Usuário deletado com sucesso.");
+
+            $response = $this->validation->validateDestroy($id);
+
+            if ($response['success']) {
+                if ($this->repository->delete($id)) {
+                    $response = ResponseHelper::responseSuccess(msg: "Usuário deletado com sucesso.");
+                } else {
+                    $response = ResponseHelper::responseError(msg: "Falha ao deletar o usuário!");
+                }
             } else {
-                $response = ResponseHelper::responseError(msg: "Falha ao deletar o usuário!");
+                $response = ResponseHelper::responseError(data: $response['data'], msg: $response['msg'], statusCode: 422);
             }
         } catch (\Exception $ex) {
             $response = ResponseHelper::responseError(msg: $ex->getMessage());

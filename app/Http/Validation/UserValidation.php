@@ -52,4 +52,16 @@ class UserValidation implements IValidation
 
         return ResponseHelper::responseSuccess(msg: "", json: false);
     }
+
+    public function validateDestroy(int $id)
+    {
+        $model = $this->repository->find($id);
+        $shelters = $model->shelters()->where('owner', true)->get()->toArray();
+
+        if(!empty($shelters)){
+            return ResponseHelper::responseValidateError([], msg: 'Não é possível remover este usuário pois é responsável por um ou mais abrigos!', json: false);
+        }
+
+        return ResponseHelper::responseSuccess(msg: '', json: false);
+    }
 }
