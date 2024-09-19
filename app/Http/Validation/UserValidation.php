@@ -39,6 +39,10 @@ class UserValidation implements IValidation
             return ResponseHelper::responseValidateError([], msg: "E-mail já cadastrado!", json: false);
         }
 
+        if ($this->repository->exists(Arr::only($dados, ["username"]), $id)) {
+            return ResponseHelper::responseValidateError([], msg: "Este usuário já está cadastrado!", json: false);
+        }
+
         if ($id && $id > 0 && !$this->repository->hasChangedPassword($id)) {
             return ResponseHelper::responseValidateError(
                 msg: "Não é possível editar um usuário que ainda não alterou sua senha no primeiro acesso.", 

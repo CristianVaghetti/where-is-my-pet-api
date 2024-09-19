@@ -18,7 +18,7 @@ class LogRepository extends BaseRepository
     /**
      * Necessary Relationships
      */
-    private const withRelations = ['user.individual','details'];
+    private const withRelations = ['user', 'details'];
 
     /**
      * Filters

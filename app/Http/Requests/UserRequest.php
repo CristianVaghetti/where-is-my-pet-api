@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\BaseRequest;
 
-class ShelterRequest extends BaseRequest
+class UserRequest extends BaseRequest
 {
 
     /**
@@ -32,14 +32,13 @@ class ShelterRequest extends BaseRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'state_id' => ['required', 'exists:states,id'],
-            'city_id' => ['required', 'exists:cities,id'],
-            'zip_code' => ['string', 'min:8', 'max:8'],
-            'district' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string', 'max:255'],
-            'address_number' => ['required', 'string', 'max:255'],
-            'address_note' => ['string', 'nullable', 'max:255'],
+            'name' => ['required', 'string', 'max:50'],
+            'username' => ['required', 'string', 'max:16'],
+            'phone' => ['required', 'string', 'min:10', 'max:11'],
+            'email' => ['string', 'max:50'],
+            'status' => ['boolean'],
+            'profile_id' => ['required', 'integer', 'exists:profiles,id'],
+            'avatar' => ['string', 'nullable'],
         ];
     }
 
@@ -62,13 +61,12 @@ class ShelterRequest extends BaseRequest
     {
         return [
             'name' => 'Nome',
-            'state_id' => 'Estado',
-            'city_id' => 'Cidade',
-            'zip-code' => 'CEP',
-            'district' => 'Bairro',
-            'address' => 'Logradouro',
-            'address_number' => 'Número',
-            'address_note' => 'Complemento',
+            'username' => 'Usuário',
+            'phone' => 'Contato',
+            'email' => 'Email',
+            'status' => 'Status',
+            'profile_id' => 'Perfil',
+            'avatar' => 'Imagem de perfil',
         ];
     }
 }

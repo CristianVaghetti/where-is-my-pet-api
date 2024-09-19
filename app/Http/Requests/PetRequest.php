@@ -32,13 +32,13 @@ class PetRequest extends BaseRequest
     public function rules()
     {
         return [
-            'personality' => ['required', 'string'],
+            'personality' => ['required', 'string', 'max:255'],
             'file' => ['required', 'string'],
-            'shelter_id' => ['required', 'integer'],
+            'shelter_id' => ['required', 'integer', 'exists:shelters,id'],
             'found' => ['boolean'],
-            'owner_name' => ['string', 'nullable'],
-            'owner_email' => ['email', 'nullable'],
-            'owner_phone' => ['string', 'nullable'],
+            'owner_name' => ['string', 'nullable', 'max:255'],
+            'owner_email' => ['email', 'nullable', 'max:255'],
+            'owner_phone' => ['string', 'nullable', 'max:255'],
         ];
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseHelper;
+use App\Http\Requests\UserRequest;
 use App\Http\Validation\UserValidation;
 use App\Repository\UserRepository;
 use Illuminate\Http\Request;
@@ -58,7 +59,7 @@ class UserController extends Controller
     /**
      * Storing a new user.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         try {
             $data = $request->all();
@@ -83,7 +84,7 @@ class UserController extends Controller
     /**
      * Updatind a user.
      */
-    public function update(Request $request, int $id)
+    public function update(UserRequest $request, int $id)
     {
         try {              
             $data = $request->all();
