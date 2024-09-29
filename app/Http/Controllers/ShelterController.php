@@ -3,19 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Http\Validation\ShelterValidation;
-use App\Models\Shelter;
 use App\Repository\ShelterRepository;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseHelper;
 use App\Http\Requests\ShelterRequest;
+use App\Services\ShelterService;
 
 class ShelterController extends Controller
 {
     protected ShelterRepository $repository;
     protected ShelterValidation $validation;
 
-    public function __construct(ShelterRepository $repository, ShelterValidation $validation)
-    {
+    public function __construct (
+        ShelterRepository $repository, 
+        ShelterValidation $validation, 
+        protected ShelterService $shelterService
+    ) {
         $this->repository = $repository;
         $this->validation = $validation;
     }
@@ -108,5 +111,16 @@ class ShelterController extends Controller
         } catch (\Exception $ex) {
             return ResponseHelper::responseError([], $ex->getMessage());
         }
+    }
+
+    public function managementRequest(int $id)
+    {
+        $managementRequest = $this->shelterService->managementRequest($id);
+
+        if (!$managementRequest) {
+            return ResponseHelper::responseError([], 'Abrigo não localizado!', statusCode: 404);
+        }
+
+        return ResponseHelper::responseSuccess([], "Sucesso!");
     }
 }

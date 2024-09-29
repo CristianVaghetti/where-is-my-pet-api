@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Models\Shelter;
 use App\Models\State;
 use App\Models\City;
+use App\Models\ShelterManagementRequest;
 use App\Repository\BaseRepository;
 use Illuminate\Support\Facades\Auth;
 
@@ -74,5 +75,15 @@ class ShelterRepository extends BaseRepository
         }
 
         return $model;
+    }
+
+    public function managementRequest(int $id): bool
+    {
+        ShelterManagementRequest::create([
+            'shelter_id' => $id,
+            'user_id' => Auth::user()->id,
+        ]);
+        
+        return true;
     }
 }
