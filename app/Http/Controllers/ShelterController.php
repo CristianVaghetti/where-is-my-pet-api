@@ -104,23 +104,30 @@ class ShelterController extends Controller
     {
         try {
             if ($this->repository->delete($id)) {
-                return ResponseHelper::responseSuccess([], "Sucesso!");
+                return ResponseHelper::responseSuccess(msg: "Sucesso!");
             } else {
-                return ResponseHelper::responseError([], "Falha!");
+                return ResponseHelper::responseError(msg: "Falha!");
             }
         } catch (\Exception $ex) {
-            return ResponseHelper::responseError([], $ex->getMessage());
+            return ResponseHelper::responseError(msg: $ex->getMessage());
         }
     }
 
     public function managementRequest(int $id)
     {
-        $managementRequest = $this->shelterService->managementRequest($id);
-
-        if (!$managementRequest) {
-            return ResponseHelper::responseError([], 'Abrigo não localizado!', statusCode: 404);
+        try {
+            return $this->shelterService->managementRequest($id);
+        } catch (\Exception $ex) {
+            return ResponseHelper::responseError(msg: $ex->getMessage());
         }
+    }
 
-        return ResponseHelper::responseSuccess([], "Sucesso!");
+    public function managementApproval(Request $request)
+    {
+        try {
+            return $this->shelterService->managementApproval($request->all());
+        } catch (\Exception $ex) {
+            return ResponseHelper::responseError(msg: $ex->getMessage());
+        }
     }
 }

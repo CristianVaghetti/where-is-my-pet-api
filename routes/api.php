@@ -43,5 +43,8 @@ Route::middleware('jwt.authenticate')->group(function () {
     Route::apiResources(['pet' => PetController::class]);
     Route::get('/pet-types', 'PetController@fetchTypes');
 
-    Route::get('/shelter/management-request/{id}', 'ShelterController@managementRequest');
+    Route::prefix('/shelter/management-request')->controller('ShelterController')->group(function () {
+        Route::get('{id}', 'managementRequest');
+        Route::post('', 'managementApproval');
+    });
 });

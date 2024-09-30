@@ -7,6 +7,7 @@ use App\Models\State;
 use App\Models\City;
 use App\Models\ShelterManagementRequest;
 use App\Repository\BaseRepository;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class ShelterRepository extends BaseRepository
@@ -85,5 +86,18 @@ class ShelterRepository extends BaseRepository
         ]);
         
         return true;
+    }
+
+    public function managementApproval(ShelterManagementRequest $smrequest, bool $status): bool
+    {
+        $save = [
+            'approved' => $status,
+            'viewed_at' => Carbon::now()->format('d/m/Y - H:i:s'),
+        ];
+
+        $shelter = $smrequest->shelter;
+        if ($status) $shelter->users()->attach($shelter->id, ['user_id' => $smrequest->user_id, 'owner' => false]);
+        
+        return $smrequest->update($save);
     }
 }
